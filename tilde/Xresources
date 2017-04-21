@@ -1,0 +1,5 @@
+Rxvt*reverseVideo: True
+Rxvt*scrollBar_right: True
+Xaw*Simple.background: gray50
+XTerm*color4: blue
+XTerm*geometry: 80x80+1800+200

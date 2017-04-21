@@ -1,0 +1,40 @@
+alias x exit
+
+alias ls "ls --color=auto"
+alias la "ls -la"
+alias d "ls -d */"
+alias dud "du --max-depth=1 -h | sort -h"
+
+alias c2f "echo 'scale=1; \!\!:1 * 9 / 5 + 32' | bc"
+alias f2c "echo 'scale=1;( \!\!:1 - 32 )*5/9' | bc"
+
+alias no "cat ~/misc/notes.txt"
+alias notes "vim ~/misc/notes.txt"
+alias dns "dig +nocmd \!\!:1 +noall +answer"
+alias cals "diff -y <(cal -y 2016)  <(cal -y 2017)"
+alias clock "watch -t -n1 'date +%T| figlet -W -c -f big'"
+
+setenv PATH "${PATH}:/home/austin/bin"
+setenv EDITOR vim
+
+set autolist
+limit coredumpsize 0
+
+if ( -f ~/.tcshrc_local ) then
+    source ~/.tcshrc_local
+endif
+
+switch ($TERM)
+	case "xterm*":
+	case "rxvt*":
+		if ($?REMOTEHOST) then
+			set prompt="%{\033]0;%n@%m:%~\007%}%n@%m%#"
+		else
+			set prompt="%{\033]0;%n@%m:%~\007%}%#"
+		endif
+		setenv TERM xterm-256color
+		breaksw
+	default:
+		set prompt="%#"
+		breaksw
+endsw

@@ -1,0 +1,3 @@
+" graphical vim settings
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 12
+set lines=60

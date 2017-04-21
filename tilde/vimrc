@@ -1,0 +1,160 @@
+" turn off compability mode
+set nocp
+
+" set how highlights are displayed
+hi Normal guibg=black guifg=white
+hi clear SpellBad
+hi SpellBad cterm=bold ctermfg=red
+
+set laststatus=2        " always have status line
+set encoding=utf-8      " using UTF-8 terminal
+set nobackup            " backups suck
+set nowritebackup       " seriously
+set history=50          " keep 50 lines of command line history
+set ruler               " always show ruler
+set showcmd             " show incomplete commands
+set vb                  " visual bell
+set hidden              " hide buffers when abandoned
+set scrolloff=2         " two lines of context
+set autoread            " autoread when file changes
+set nohlsearch          " do not highlight search terms by default
+set spellsuggest=5      " offer five spelling suggestions
+
+" wild options
+set wildmode=longest,list,full
+set wildmenu
+set wildignorecase
+set wildignore+=*.o,*.zip
+
+" /g flag on :s by default
+set gdefault
+
+" backspace in visual mode deletes selection
+vnoremap <BS> d
+
+" enable syntax highlighting
+syntax enable
+
+" abbreviations
+iabbrev teh the
+iabbrev #i #include
+cabbrev W w
+nnoremap ; :
+
+" blank line shortcuts
+nmap N O<Esc>
+nmap n o<Esc>
+
+" custom silent command to redraw screen after running
+":command -nargs=+ Silent execute ':silent !'.<args>.'<CR>' | execute ':redraw!'
+
+" set lead character for shortcuts
+let mapleader = ","
+
+" general shortcuts
+map <leader>ss :set spell!<CR>
+map <leader>sl :set list!<CR>
+map <leader>sy :SyntasticCheck<CR>
+map <leader>d :silent !mupdf %<.pdf<CR>
+map <leader>r :silent !./%<CR>
+
+" vimrc shortcuts
+map <leader>ev :sp ~/.vimrc<CR>
+map <leader>sv :source ~/.vimrc<CR>
+
+" clipboard shortcuts
+nmap <leader>y "+yy
+vmap <leader>y "+y
+map <leader>P "*p
+map <leader>o :set paste!<CR>
+
+" notes file
+map <silent> <leader>z :sp ~/misc/notes.txt<CR>
+
+" nerdtree
+map <silent> <leader>t :NERDTreeToggle<CR>
+
+" split window shortcuts
+map <space>w <c-w><c-w>
+map <space><space> <c-W>_
+map <space>= <c-W>=
+map <space>r <c-W>r
+map <space>o <c-W>o
+if bufwinnr(1)
+        map + <c-W>+
+        map - <c-W>-
+endif
+
+" buffer shortcuts
+nmap <leader>n :bnext<CR>
+nmap <leader>p :bprev<CR>
+nmap <leader>q :bprev <BAR> bd #<CR>
+"nmap <leader>c :b css<CR>
+"nmap <leader>j :b js<CR>
+"nmap <leader>h :b html<CR>
+nmap <C-t> :enew<CR>
+imap <C-t> <Esc>:enew<CR>
+
+" set file types of unknown extensions
+au BufRead,BufNewFile,BufEnter *.pde setfiletype cpp
+au BufRead,BufNewFile,BufEnter *.json setfiletype javascript
+au BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+au FileType gitcommit setlocal spell spelllang=en_us
+
+" settings for airline display
+let g:airline_theme='light'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_powerline_fonts = 1
+
+" comment formats for different file types
+let s:comment_map = {
+    \   "c": '//',
+    \   "cpp": '//',
+    \   "go": '//',
+    \   "java": '// ',
+    \   "javascript": '\/\/',
+    \   "php": '//',
+    \   "python": '#',
+    \   "ruby": '#',
+    \   "vim": '"',
+    \ }
+
+" function to toggle commenting
+function! ToggleComment()
+    if has_key(s:comment_map, &filetype)
+        let comment_leader = s:comment_map[&filetype]
+        if getline('.') =~ "^" . comment_leader
+            execute "silent s/^" . comment_leader . "//"
+        else
+            execute "silent s/^/" . comment_leader . "/"
+        endif
+    else
+        echo "No comment leader found for filetype"
+    end
+endfunction
+
+" shortcut to comment text in normal and visual modes
+nnoremap <leader>, :call ToggleComment()<cr>
+vnoremap <leader>, :call ToggleComment()<cr>
+
+" four space tabs
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+" use sudo for root owned files
+cmap w!! w !sudo tee % > /dev/null<cr>
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+" make arrows ignore wrapping
+"inoremap <Down> <C-O>gj
+"inoremap <Up> <C-O>gk
+
+execute pathogen#infect()
+
+if version >= 600
+  filetype plugin indent on
+endif
