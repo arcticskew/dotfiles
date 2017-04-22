@@ -1,0 +1,40 @@
+#!/usr/bin/python
+"""
+Compare FLAC filenames to artist/song tags in file. Identify mismatched directories.
+"""
+
+import os
+import sys
+from mutagen.flac import FLAC
+from mutagen.easyid3 import EasyID3
+
+origdir = os.getcwd()
+
+for dirname, dirnames, filenames in os.walk(origdir):
+    flactag = None
+    mismatch = False
+    for f in filenames:
+        if f[-4:] == 'flac':
+            #if flactag is None: print dirname.replace(origdir+'/','')
+            try:
+                flactag=FLAC(os.path.join(dirname,f))
+                tracknumber=f[:2]
+                title=flactag['title'][0].replace('/','-')
+                artist=flactag['artist'][0]
+                tracknumber='%02d'%int(flactag['tracknumber'][0])
+            except:
+                continue
+
+            #if (flactag.has_key('albumartist')):
+            #       tagname='%s-%s-%s.flac' % (tracknumber,artist,title)
+            #else:
+            #       tagname='%s-%s.flac' % (tracknumber,title)
+            tagname='%s-%s.flac' % (tracknumber,title)
+
+            if (f != tagname):
+                    print f,tagname
+                    os.rename(os.path.join(dirname,f),os.path.join(dirname,tagname))
+                    mismatch = True
+
+    if mismatch == True:
+            print dirname.replace(origdir+'/','')

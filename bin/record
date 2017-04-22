@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Record stream from HD Homerun Extend to a file
+#
+
+CHANNEL=$1
+DURATION="$(( $2 * 60 ))"
+SHOW=$3
+EPISODE=$4
+
+DIR="/mnt/video/tv/$SHOW"
+
+if [ ! -d "$DIR" ]; then
+    mkdir -p "$DIR"
+fi
+
+curl -o "/mnt/video/tv/$SHOW/$EPISODE.mp4" "http://tv:5004/auto/v$CHANNEL?duration=$DURATION"

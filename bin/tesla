@@ -1,0 +1,70 @@
+#!/usr/bin/python
+#
+# Python script to access features of Tesla Model S API
+# Uses teslajson module for REST API access
+#
+
+import teslajson, sys, os
+import datetime as dt
+
+commands = ['status','air','lock','unlock','honk','flash']
+
+email = os.environ['TESLA_EMAIL']
+password = os.environ['TESLA_KEY']
+
+def ctof(temp):
+    return temp*1.8+32
+
+def execute(action):
+    c = teslajson.Connection(email, password)
+    v = c.vehicles[0]
+
+    if action == 'status':
+        subsystems = ['charge','vehicle', 'climate']
+        state = {}
+
+        print 'Waking up...'
+        v.wake_up()
+
+        for sub in subsystems:
+            print 'Getting %s status...' % sub
+            state[sub] = v.data_request('%s_state' % sub)
+
+        print ''
+        print 'Locked: %s' % str(state['vehicle']['locked'])
+        print 'Climate on: %s' % str(state['climate']['is_auto_conditioning_on'])
+        if state['climate']['inside_temp']:
+            print 'Temperature inside: %.1fF' % ctof(state['climate']['inside_temp'])
+        if state['climate']['outside_temp']:
+            print 'Temperature outside: %.1fF' % ctof(state['climate']['outside_temp'])
+        print 'Range: %s (%s%%)' % (str(state['charge']['battery_range']), str(state['charge']['battery_level']))
+        if state['charge']['charging_state'] == 'Charging':
+            print 'Hours to full: %.1f' % state['charge']['time_to_full_charge']
+            done = dt.datetime.now() + dt.timedelta(hours=state['charge']['time_to_full_charge'])
+            if done.date() == dt.datetime.today().date():
+                donetime = done.strftime('%H:%M')
+            elif done.date() == (dt.datetime.today().date()+dt.timedelta(1)):
+                donetime = 'tomorrow ' + done.strftime('%H:%M')
+            else:
+                donetime = done.strftime('%a %H:%M')
+            print 'Charge complete: %s' % donetime
+    elif action == 'air':
+            v.command('auto_conditioning_start')
+    elif action == 'unlock':
+            v.command('door_unlock')
+    elif action == 'lock':
+            v.command('door_lock')
+    elif action == 'honk':
+            v.command('honk_horn')
+    elif action == 'flash':
+            v.command('flash_lights')
+            
+
+if len(sys.argv) > 1:
+    if sys.argv[1] in commands:
+            action = sys.argv[1]
+            execute(action)
+    else:
+            print 'Invalid command'
+else:
+    print 'Valid commands: %s' % ', '.join(commands)

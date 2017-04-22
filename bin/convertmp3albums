@@ -1,0 +1,37 @@
+#!/usr/bin/python
+"""
+Convert albums of FLAC files to MP3 files and copy tags
+"""
+
+import os
+import sys
+from mutagen.flac import FLAC
+from mutagen.easyid3 import EasyID3
+
+taglist = ['album','artist','title','date','tracknumber']
+
+origdir = '/mnt/flac'
+convdir = '/mnt/othermp3'
+
+def flac2mp3(flacfile,mp3file):
+    flactag=FLAC(flacfile)
+        enccommand = "flac -d -c \"%s\" | lame -h -V2 --add-id3v2 - \"%s\"" % (flacfile, mp3file)
+        os.system(enccommand)
+
+        mp3tag=EasyID3(mp3file)
+        for key in taglist:
+            if (flactag.has_key(key)): mp3tag[key] = flactag[key]
+        mp3tag.save()
+
+        return
+
+for dirname, dirnames, filenames in os.walk(origdir):
+    d = dirname.replace(origdir+'/','')
+        if os.path.exists(os.path.join(convdir,d)): continue
+        for f in filenames:
+            if f[-4:] == 'flac':
+                if os.path.exists(os.path.join(convdir,d,f.replace('flac','mp3'))): continue
+                        if not os.path.exists(os.path.join(convdir,d)):
+                            os.makedirs(os.path.join(convdir,d))
+                                print 'Creating directory: %s' % d
+                        flac2mp3(os.path.join(origdir,d,f),os.path.join(convdir,d,f.replace('flac','mp3')))
