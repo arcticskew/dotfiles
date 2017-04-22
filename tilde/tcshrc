@@ -26,17 +26,17 @@ endif
 
 if ("$?TERM") then
     switch ($TERM)
-            case "xterm*":
-            case "rxvt*":
-                    if ($?REMOTEHOST) then
-                            set prompt="%{\033]0;%n@%m:%~\007%}%n@%m%#"
-                    else
-                            set prompt="%{\033]0;%n@%m:%~\007%}%#"
-                    endif
-                    setenv TERM xterm-256color
-                    breaksw
-            default:
-                    set prompt="%#"
-                    breaksw
+        case "xterm*":
+        case "rxvt*":
+            if ($?REMOTEHOST) then
+                    set prompt="%{\033]0;%n@%m:%~\007%}%n@%m%#"
+            else
+                    set prompt="%{\033]0;%n@%m:%~\007%}%#"
+            endif
+            setenv TERM xterm-256color
+            breaksw
+        default:
+            set prompt="%#"
+            breaksw
     endsw
 endif
