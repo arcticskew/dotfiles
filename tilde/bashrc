@@ -6,6 +6,10 @@ case $- in
       *) return;;
 esac
 
+# common
+export EDITOR=vim
+export VISUAL=gvim
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
@@ -97,6 +101,9 @@ if [ -f ~/.bash_local ]; then
 fi
 
 alias x="exit"
+alias d="ls -d */"
 
+alias dud="du --max-depth=1 -h | sort -h"
+alias dns="dig +nocmd $1 +noall +answer"
 alias notes="vim ~/misc/notes.txt"
 alias clock="watch -t -n1 'date +%T| figlet -W -c -f big'"
