@@ -6,6 +6,7 @@ hi Normal guibg=black guifg=white
 hi clear SpellBad
 hi SpellBad cterm=bold ctermfg=red
 
+" main settings
 set laststatus=2        " always have status line
 set encoding=utf-8      " using UTF-8 terminal
 set nobackup            " backups suck
@@ -52,24 +53,25 @@ nmap n o<Esc>
 let mapleader = ","
 
 " general shortcuts
-map <leader>ss :set spell!<CR>
-map <leader>sl :set list!<CR>
-map <leader>sy :SyntasticCheck<CR>
+map <silent> <leader>ss :set spell!<CR>
+map <silent> <leader>sl :set list!<CR>
+map <silent> <leader>sy :SyntasticCheck<CR>
+map <silent> <leader>sg :GitGutterToggle<CR>
 map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
 
 " vimrc shortcuts
-map <leader>ev :sp ~/.vimrc<CR>
+map <leader>ev :e ~/.vimrc<CR>
 map <leader>sv :source ~/.vimrc<CR>
 
 " clipboard shortcuts
 nmap <leader>y "+yy
 vmap <leader>y "+y
 map <leader>P "*p
-map <leader>o :set paste!<CR>
+map <silent> <leader>sp :set paste!<CR>
 
 " notes file
-map <silent> <leader>z :sp ~/misc/notes.txt<CR>
+map <silent> <leader>z :e ~/misc/notes.txt<CR>
 
 " nerdtree
 map <silent> <leader>t :NERDTreeToggle<CR>
@@ -89,9 +91,7 @@ endif
 nmap <leader>n :bnext<CR>
 nmap <leader>p :bprev<CR>
 nmap <leader>q :bprev <BAR> bd #<CR>
-"nmap <leader>c :b css<CR>
-"nmap <leader>j :b js<CR>
-"nmap <leader>h :b html<CR>
+nmap <leader>o :Bonly<CR>
 nmap <C-t> :enew<CR>
 imap <C-t> <Esc>:enew<CR>
 
@@ -144,10 +144,17 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " use sudo for root owned files
 cmap w!! w !sudo tee % > /dev/null<cr>
 
+" Syntastic
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_warning_symbol = '💩'
+
+" NERDTree
+let NERDTreeQuitOnOpen = 1
+
+" GitGutter
+let g:gitgutter_enabled = 0
 
 " make arrows ignore wrapping
 "inoremap <Down> <C-O>gj
