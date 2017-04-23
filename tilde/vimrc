@@ -53,12 +53,18 @@ nmap n o<Esc>
 let mapleader = ","
 
 " general shortcuts
-map <silent> <leader>ss :set spell!<CR>
 map <silent> <leader>sl :set list!<CR>
 map <silent> <leader>sy :SyntasticCheck<CR>
 map <silent> <leader>sg :GitGutterToggle<CR>
 map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
+
+" spelling shortcuts
+map <silent> <leader>ss :setlocal spell!<CR>
+map <silent> <leader>sn ]s
+map <silent> <leader>sp [s
+map <silent> <leader>sa zg
+map <silent> <leader>s? z=
 
 " vimrc shortcuts
 map <leader>ev :e ~/.vimrc<CR>
@@ -68,7 +74,7 @@ map <leader>sv :source ~/.vimrc<CR>
 nmap <leader>y "+yy
 vmap <leader>y "+y
 map <leader>P "*p
-map <silent> <leader>sp :set paste!<CR>
+map <silent> <leader>so :set paste!<CR>
 
 " notes file
 map <silent> <leader>z :e ~/misc/notes.txt<CR>
