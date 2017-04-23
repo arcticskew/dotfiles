@@ -56,7 +56,7 @@ fi
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;\u@\h:\w (b)\a\]$PS1"
+    PS1="\[\e]0;\u@\h:\w\a\]$PS1"
     ;;
 *)
     ;;
@@ -98,6 +98,8 @@ fi
 
 alias x="exit"
 alias d="ls -d */"
+alias q="ssh quark"
+alias n="ssh skew-t.com"
 
 # prompts
 alias si='PS1="\[\e]0;\u@\h:\w\a\]\u@\h>"'
