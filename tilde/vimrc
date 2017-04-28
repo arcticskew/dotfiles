@@ -46,16 +46,11 @@ nnoremap ; :
 nmap N O<Esc>
 nmap n o<Esc>
 
-" custom silent command to redraw screen after running
-":command -nargs=+ Silent execute ':silent !'.<args>.'<CR>' | execute ':redraw!'
-
 " set lead character for shortcuts
 let mapleader = ","
 
 " general shortcuts
 map <silent> <leader>sl :set list!<CR>
-map <silent> <leader>sy :SyntasticCheck<CR>
-map <silent> <leader>sg :GitGutterToggle<CR>
 map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
 
@@ -79,6 +74,22 @@ map <silent> <leader>so :set paste!<CR>
 " notes file
 map <silent> <leader>z :e ~/misc/notes.txt<CR>
 
+" gitgutter
+map <silent> <leader>sg :GitGutterToggle<CR>
+map <silent> <leader>gg :GitGutterToggle<CR>
+map <silent> <leader>sh :GitGutterLineHighlightsToggle<CR>
+map <silent> <leader>gh :GitGutterLineHighlightsToggle<CR>
+
+" fugitive
+map <silent> <leader>gs :Gstatus<CR>
+map <silent> <leader>gc :Gcommit<CR>
+
+" syntastic
+map <silent> <leader>sy :SyntasticCheck<CR>
+map <silent> <leader>sr :SyntasticReset<CR>
+map <silent> <leader>en :lnext<CR>
+map <silent> <leader>ep :lprev<CR>
+
 " nerdtree
 map <silent> <leader>t :NERDTreeToggle<CR>
 
@@ -89,8 +100,8 @@ map <space>= <c-W>=
 map <space>r <c-W>r
 map <space>o <c-W>o
 if bufwinnr(1)
-        map + <c-W>+
-        map - <c-W>-
+    map + <c-W>+
+    map - <c-W>-
 endif
 
 " buffer shortcuts
@@ -104,45 +115,8 @@ imap <C-t> <Esc>:enew<CR>
 " set file types of unknown extensions
 au BufRead,BufNewFile,BufEnter *.pde setfiletype cpp
 au BufRead,BufNewFile,BufEnter *.json setfiletype javascript
-au BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+au FileType markdown setlocal spell spelllang=en_us
 au FileType gitcommit setlocal spell spelllang=en_us
-
-" settings for airline display
-let g:airline_theme='light'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_powerline_fonts = 1
-
-" comment formats for different file types
-let s:comment_map = {
-    \   "c": '//',
-    \   "cpp": '//',
-    \   "go": '//',
-    \   "java": '// ',
-    \   "javascript": '\/\/',
-    \   "php": '//',
-    \   "python": '#',
-    \   "ruby": '#',
-    \   "vim": '"',
-    \ }
-
-" function to toggle commenting
-function! ToggleComment()
-    if has_key(s:comment_map, &filetype)
-        let comment_leader = s:comment_map[&filetype]
-        if getline('.') =~ "^" . comment_leader
-            execute "silent s/^" . comment_leader . "//"
-        else
-            execute "silent s/^/" . comment_leader . "/"
-        endif
-    else
-        echo "No comment leader found for filetype"
-    end
-endfunction
-
-" shortcut to comment text in normal and visual modes
-nnoremap <leader>, :call ToggleComment()<cr>
-vnoremap <leader>, :call ToggleComment()<cr>
 
 " four space tabs
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -150,21 +124,50 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " use sudo for root owned files
 cmap w!! w !sudo tee % > /dev/null<cr>
 
+" airline
+let g:airline_theme='light'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_powerline_fonts = 1
+let g:airline_symbols = get(g:,'airline_symbols',{})
+let g:airline_symbols.linenr = ''
+"au BufRead,BufNewFile *.md let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#'
+
+function Mdsetup()
+    let g:airline_section_x = 'md'
+    let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#'
+    let g:airline_symbols.spell = 'sp'
+    let g:airline_mode_map = {
+        \ '__' : '-',
+        \ 'n'  : 'N',
+        \ 'i'  : 'I',
+        \ 'R'  : 'R',
+        \ 'c'  : 'C',
+        \ 'v'  : 'V',
+        \ 'V'  : 'V',
+        \ '' : 'V',
+        \ 's'  : 'S',
+        \ }
+endfunction
+
+au FileType markdown call Mdsetup()
+
 " Syntastic
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_warning_symbol = '💩'
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
 
 " NERDTree
 let NERDTreeQuitOnOpen = 1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " GitGutter
 let g:gitgutter_enabled = 0
-
-" make arrows ignore wrapping
-"inoremap <Down> <C-O>gj
-"inoremap <Up> <C-O>gk
 
 execute pathogen#infect()
 
