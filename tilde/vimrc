@@ -33,6 +33,9 @@ set gdefault
 " backspace in visual mode deletes selection
 vnoremap <BS> d
 
+" tab character
+inoremap <S-Tab> <C-V><Tab>
+
 " enable syntax highlighting
 syntax enable
 
@@ -53,6 +56,7 @@ let mapleader = ","
 map <silent> <leader>sl :set list!<CR>
 map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
+
 
 " spelling shortcuts
 map <silent> <leader>ss :setlocal spell!<CR>
@@ -95,6 +99,7 @@ map <silent> <leader>t :NERDTreeToggle<CR>
 
 " split window shortcuts
 map <space>w <c-w><c-w>
+map <leader>w <c-w><c-w>
 map <space><space> <c-W>_
 map <space>= <c-W>=
 map <space>r <c-W>r
@@ -131,9 +136,9 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = get(g:,'airline_symbols',{})
 let g:airline_symbols.linenr = ''
-"au BufRead,BufNewFile *.md let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#'
 
-function Mdsetup()
+" Markdown specific options for minimal UI
+function! Mdsetup()
     let g:airline_section_x = 'md'
     let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#'
     let g:airline_symbols.spell = 'sp'
@@ -156,18 +161,20 @@ au FileType markdown call Mdsetup()
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
 let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
+let g:syntastic_style_warning_symbol = '!'
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 
 " NERDTree
 let NERDTreeQuitOnOpen = 1
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " GitGutter
 let g:gitgutter_enabled = 0
+hi SignColumn ctermbg=0
+hi GitGutterAddDefault ctermbg=0
+hi GitGutterChangeDefault ctermbg=0
+hi GitGutterDeleteDefault ctermbg=0
 
 execute pathogen#infect()
 
