@@ -11,7 +11,7 @@ import shutil
 SOURCE_DIR = '~/projects/dotfiles/tilde'
 EXCLUDE = []
 NO_DOT_PREFIX = []
-PRESERVE_EXTENSION = []
+PRESERVE_EXTENSION = ['tmux.conf']
 
 def force_remove(path):
     if os.path.isdir(path) and not os.path.islink(path):
