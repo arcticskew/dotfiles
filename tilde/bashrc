@@ -107,6 +107,15 @@ alias bw='PS1="\[\e]0;\u@\h:\w\a\]\u@\h \w>"'
 alias co='PS1="\[\e]0;\u@\h:\w\a\]\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]>"'
 alias cs='PS1="\[\e]0;\u@\h:\w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]>"'
 
+# tmux
+alias t="tmux"
+alias f='tmux next-window'
+alias p='tmux prev-window'
+alias n='tmux next-window'
+alias z='tmux detach'
+alias tmv="tmux rename-window"
+alias tx="tmux detach"
+
 # temperature
 alias c2f="echo 'scale=1; \!\!:1 * 9 / 5 + 32' | bc"
 alias f2c="echo 'scale=1;( \!\!:1 - 32 )*5/9' | bc"
@@ -116,8 +125,7 @@ alias lcf="rename 'y/A-Z/a-z/' "
 alias wgetncc='wget --no-check-certificate'
 alias {up,..}='cd ..'
 alias h='history | tail'
-alias dotfiles='vim ~/projects/dotfiles/tilde'
-
+alias dgs="dpkg --get-selections"
 alias dud="du --max-depth=1 -h | sort -h"
 alias dns="dig +nocmd $1 +noall +answer"
 alias notes="vim ~/misc/notes.txt"

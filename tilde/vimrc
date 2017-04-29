@@ -57,7 +57,6 @@ map <silent> <leader>sl :set list!<CR>
 map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
 
-
 " spelling shortcuts
 map <silent> <leader>ss :setlocal spell!<CR>
 map <silent> <leader>sn ]s
