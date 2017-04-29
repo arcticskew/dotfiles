@@ -47,7 +47,15 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]>'
+    FGRN="\[\e[38;5;28m\]"
+    FGRB="\[\e[38;5;10m\]"
+    FBLE="\[\e[34m\]"
+    FRST="\[\e[38;5;8m\]"
+    RS="\[\e[0m\]"    # reset
+    HC="\[\e[1m\]"    # hicolor
+    UL="\e[4m\]"    # underline
+    INV="\e[7m\]"   # inverse background and foreground
+    PS1="${FGRN}\u${RS}@${FGRB}\h ${FBLE}${HC}\w${RS}>"
 else
     PS1='\u@\h>'
 fi
@@ -102,17 +110,14 @@ alias q="ssh quark"
 alias n="ssh skew-t.com"
 
 # prompts
-alias si='PS1="\[\e]0;\u@\h:\w\a\]\u@\h>"'
-alias bw='PS1="\[\e]0;\u@\h:\w\a\]\u@\h \w>"'
-alias co='PS1="\[\e]0;\u@\h:\w\a\]\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]>"'
-alias cs='PS1="\[\e]0;\u@\h:\w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]>"'
+alias bw='PS1="\u@\h>"'
+alias cs='PS1="\[\e]0;\u@\h:\w\a\]${FGRN}\u${RS}@${FGRB}\h${RS}>"'
 
 # tmux
 alias t="tmux"
 alias f='tmux next-window'
-alias p='tmux prev-window'
+alias p='tmux previous-window'
 alias n='tmux next-window'
-alias z='tmux detach'
 alias tmv="tmux rename-window"
 alias tx="tmux detach"
 
