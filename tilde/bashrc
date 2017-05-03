@@ -118,6 +118,11 @@ alias n="ssh skew-t.com"
 alias bw='PS1="\u@\h>"'
 alias cs='PS1="\[\e]0;\u@\h:\w\a\]${FGRN}\u${RS}@${FGRB}\h${RS}>"'
 
+# dotfiles
+alias dotfiles='vim ~/projects/dotfiles/tilde'
+alias bl="vim ~/.bash_local && source ~/.bash_local"
+alias bashrc="vim ~/.bashrc && source ~/.bashrc && echo \"Successfully updated .bashrc\""
+
 # tmux
 alias t="tmux"
 if [ -n "$TMUX" ]; then
@@ -125,6 +130,8 @@ if [ -n "$TMUX" ]; then
     alias f='tmux last-pane'
     alias k='tmux select-pane -U' 
     alias j='tmux select-pane -D' 
+    alias c="tmux clock-mode"
+    alias tl="tmux list-windows"
     alias tmv="tmux rename-window"
     alias tx="tmux detach"
 fi
@@ -137,5 +144,7 @@ alias h='history | tail'
 alias dgs="dpkg --get-selections"
 alias dud="du --max-depth=1 -h | sort -h"
 alias dns="dig +nocmd $1 +noall +answer"
+alias lpng="feh \$(ls -tr *.png | tail -1)"
+alias pw="tr -d -c 'a-zA-Z0-9!@#$%^&*()' < /dev/urandom | head -c 18; echo"
 alias notes="vim ~/misc/notes.txt"
 alias clock="watch -t -n1 'date +%T| figlet -W -c -f big'"
