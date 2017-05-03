@@ -47,15 +47,20 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    FGRN="\[\e[38;5;28m\]"
+    #FGRN="\[\e[38;5;28m\]"
+    FGRN="\[\e[34m\]"
     FGRB="\[\e[38;5;10m\]"
     FBLE="\[\e[34m\]"
-    FRST="\[\e[38;5;8m\]"
+    FRST="\[\e[38;5;94m\]"
     RS="\[\e[0m\]"    # reset
     HC="\[\e[1m\]"    # hicolor
     UL="\e[4m\]"    # underline
     INV="\e[7m\]"   # inverse background and foreground
-    PS1="${FGRN}\u${RS}@${FGRB}\h ${FBLE}${HC}\w${RS}>"
+    if [ -n "$TMUX" ]; then
+        PS1="${FGRN}\u${RS}${FRST}@${FGRB}\h ${FBLE}${HC}\w${RS}>"
+    else
+        PS1="${FGRN}\u${RS}@${FGRB}\h ${FBLE}${HC}\w${RS}>"
+    fi
 else
     PS1='\u@\h>'
 fi
@@ -115,15 +120,14 @@ alias cs='PS1="\[\e]0;\u@\h:\w\a\]${FGRN}\u${RS}@${FGRB}\h${RS}>"'
 
 # tmux
 alias t="tmux"
-alias f='tmux next-window'
-alias p='tmux previous-window'
-alias n='tmux next-window'
-alias tmv="tmux rename-window"
-alias tx="tmux detach"
-
-# temperature
-alias c2f="echo 'scale=1; \!\!:1 * 9 / 5 + 32' | bc"
-alias f2c="echo 'scale=1;( \!\!:1 - 32 )*5/9' | bc"
+if [ -n "$TMUX" ]; then
+    alias b='tmux last-window'
+    alias f='tmux last-pane'
+    alias k='tmux select-pane -U' 
+    alias j='tmux select-pane -D' 
+    alias tmv="tmux rename-window"
+    alias tx="tmux detach"
+fi
 
 # other useful tools
 alias lcf="rename 'y/A-Z/a-z/' "
