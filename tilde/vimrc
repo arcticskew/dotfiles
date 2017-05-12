@@ -71,7 +71,7 @@ map <leader>sv :source ~/.vimrc<CR>
 " clipboard shortcuts
 nmap <leader>y "+yy
 vmap <leader>y "+y
-map <leader>P "*p
+map <leader>P "+p
 map <silent> <leader>so :set paste!<CR>
 
 " notes file
