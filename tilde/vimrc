@@ -6,6 +6,10 @@ hi Normal guibg=black guifg=white
 hi clear SpellBad
 hi SpellBad cterm=bold ctermfg=red
 
+" highlight trailing whitespace
+hi ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+\%#\@<!$/
+
 " main settings
 set laststatus=2        " always have status line
 set encoding=utf-8      " using UTF-8 terminal
