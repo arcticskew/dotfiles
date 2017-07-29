@@ -27,9 +27,6 @@ set wildmenu
 set wildignorecase
 set wildignore+=*.o,*.zip
 
-" /g flag on :s by default
-set gdefault
-
 " backspace in visual mode deletes selection
 vnoremap <BS> d
 
@@ -85,6 +82,7 @@ map <silent> <leader>gh :GitGutterLineHighlightsToggle<CR>
 
 " fugitive
 map <silent> <leader>gs :Gstatus<CR>
+map <silent> <leader>gw :Gwrite<CR>
 map <silent> <leader>gc :Gcommit<CR>
 
 " syntastic
@@ -116,14 +114,15 @@ nmap <leader>o :Bonly<CR>
 nmap <C-t> :enew<CR>
 imap <C-t> <Esc>:enew<CR>
 
+" four space tabs
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
 " set file types of unknown extensions
 au BufRead,BufNewFile,BufEnter *.pde setfiletype cpp
 au BufRead,BufNewFile,BufEnter *.json setfiletype javascript
 au FileType markdown setlocal spell spelllang=en_us
 au FileType gitcommit setlocal spell spelllang=en_us
-
-" four space tabs
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+au FileType conf setlocal tabstop=4 noexpandtab
 
 " use sudo for root owned files
 cmap w!! w !sudo tee % > /dev/null<cr>
@@ -153,7 +152,6 @@ function! Mdsetup()
         \ 's'  : 'S',
         \ }
 endfunction
-
 au FileType markdown call Mdsetup()
 
 " Syntastic
