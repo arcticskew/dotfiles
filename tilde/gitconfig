@@ -9,6 +9,7 @@
     s = status -s
     st = status
     br = branch
+    d = diff --staged
     l = log --pretty=format:"%C(yellow)%h\\ %ad\\ %Creset%s%Cblue" --date=short
     ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     last = log -1 HEAD

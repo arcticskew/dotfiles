@@ -31,6 +31,9 @@ set wildmenu
 set wildignorecase
 set wildignore+=*.o,*.zip
 
+" fancy listchars
+set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
+
 " backspace in visual mode deletes selection
 vnoremap <BS> d
 
@@ -124,9 +127,21 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " set file types of unknown extensions
 au BufRead,BufNewFile,BufEnter *.pde setfiletype cpp
 au BufRead,BufNewFile,BufEnter *.json setfiletype javascript
+
+" spellcheck markdown and gitcommit
 au FileType markdown setlocal spell spelllang=en_us
 au FileType gitcommit setlocal spell spelllang=en_us
-au FileType conf setlocal tabstop=4 noexpandtab
+
+" tabs in conf files (LDM, etc.)
+function! Ldmsetup()
+    setlocal tabstop=8 noexpandtab
+    set list
+    set listchars=tab:··
+endfunction
+au BufWinEnter ldmd.conf,pqact*.conf call Ldmsetup()
+
+" highlight long lines
+au BufWinEnter *.c,*.h let w:m1=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " use sudo for root owned files
 cmap w!! w !sudo tee % > /dev/null<cr>
