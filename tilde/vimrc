@@ -29,7 +29,7 @@ set spellsuggest=5      " offer five spelling suggestions
 set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
-set wildignore+=*.o,*.zip
+set wildignore+=*.o,*.zip,*.pyc
 
 " fancy listchars
 set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
@@ -136,7 +136,7 @@ au FileType gitcommit setlocal spell spelllang=en_us
 function! Ldmsetup()
     setlocal tabstop=8 noexpandtab
     set list
-    set listchars=tab:··
+    set listchars=tab:␉·
 endfunction
 au BufWinEnter ldmd.conf,pqact*.conf call Ldmsetup()
 
