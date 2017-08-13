@@ -108,6 +108,7 @@ if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
 
+# shortcuts
 alias x="exit"
 alias d="ls -d */"
 alias q="ssh quark"
@@ -127,8 +128,6 @@ alias t="tmux"
 if [ -n "$TMUX" ]; then
     alias b='tmux last-window'
     alias f='tmux last-pane'
-    alias k='tmux select-pane -U' 
-    alias j='tmux select-pane -D' 
     alias c="tmux clock-mode"
     alias tl="tmux list-windows"
     alias tmv="tmux rename-window"
