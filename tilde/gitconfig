@@ -12,7 +12,7 @@
     br = branch
     d = diff --staged
     l = log --pretty=format:"%C(blue)%h\\ %C(green)%ar%C(reset)\\ %Creset%s%Cblue" --decorate --date=short
-    ll = log --pretty=format:"%C(blue)%h\\ %C(green)%ar%C(reset)\\ %Creset%s%Cblue\\ %C(white)%an%Creset" --decorate --date=short
+    ll = log --pretty=format:"%C(blue)%h\\ %C(green)%ar%C(white)\\ %s%Cblue\\ %an%Creset" --decorate --date=short
     ls = ls-tree --name-status -r HEAD
     last = log -1 HEAD
     list = diff-tree --no-commit-id --name-only -r
