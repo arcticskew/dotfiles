@@ -116,8 +116,8 @@ alias n="ssh skew-t.com"
 
 # dotfiles
 alias dotfiles='vim ~/projects/dotfiles/tilde'
-alias bl="vim ~/.bash_local && source ~/.bash_local"
-alias bashrc="vim ~/.bashrc && source ~/.bashrc && echo \"Successfully updated .bashrc\""
+alias bl="vim ~/.bash_local && source ~/.bash_local && echo \"Successfully sourced .bash_local\""
+alias bashrc="vim ~/.bashrc && source ~/.bashrc && echo \"Successfully sourced .bashrc\""
 
 # tmux
 alias t="tmux"
