@@ -8,7 +8,7 @@ import os
 import glob
 import shutil
 
-SOURCE_DIR = '~/projects/dotfiles/tilde'
+SOURCE_DIR = '~/.config/dotfiles/tilde'
 EXCLUDE = []
 NO_DOT_PREFIX = []
 PRESERVE_EXTENSION = ['tmux.conf']
