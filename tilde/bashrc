@@ -130,12 +130,102 @@ if [ -n "$TMUX" ]; then
     alias tx="tmux detach"
 fi
 
+# syntax highlight
+hc() {
+    highlight -O xterm256 $1
+}
+hl() {
+    highlight -O xterm256 $1 | less -R
+}
+
+# - fzf cd to selected directory
+zd() {
+  local dir
+  dir="$(
+    find "${1:-.}" -path '*/\.*' -prune -o -type d -print 2> /dev/null \
+      | fzf +m
+  )" || return
+  cd "$dir" || return
+}
+
+# fzf cd into the directory of the selected file
+cdf() {
+  local file
+  file="$(fzf +m -q "$*")"
+  cd "$(dirname "$file")" || return
+}
+
+# open selected file with ediro
+fe() {
+  local IFS=$'\n'
+  local files=()
+  files=(
+    "$(fzf-tmux \
+          --query="$1" \
+          --multi \
+          --select-1 \
+          --exit-0
+    )"
+  ) || return
+  "${EDITOR:-vim}" "${files[@]}"
+}
+
+# fzf git commit browser
+fshow() {
+  local execute
+
+  execute="grep -o \"[a-f0-9]\{7\}\" \
+    | head -1 \
+    | xargs -I % sh -c 'git show --color=always % | less -R'"
+
+  git log \
+    --graph \
+    --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" \
+    | fzf \
+        --ansi \
+        --no-sort \
+        --reverse \
+        --tiebreak=index \
+        --bind=ctrl-s:toggle-sort \
+        --bind "ctrl-m:execute: ($execute) <<'FZF-EOF'
+  {}
+FZF-EOF"
+}
+
+# fzf kill process
+fkill() {
+  local pid
+
+  pid="$(
+    ps -ef \
+      | sed 1d \
+      | fzf -m \
+      | awk '{print $2}'
+  )" || return
+
+  kill -"${1:-9}" "$pid"
+}
+
+# open files in ~/.viminfo
+vin() {
+  local files
+  files="$(
+    grep '^>' "$HOME/.viminfo" \
+      | cut -c3- \
+      | while read -r line; do
+          [[ -f "${line/\~/$HOME}" ]] && echo "$line"
+        done \
+      | fzf -m -0 -1 -q "$*"
+  )"
+  "${EDITOR:-vim}" "${files/\~/$HOME}"
+}
+
 # other useful tools
 alias bw='PS1="\u@\h>"'
 alias lcf="rename 'y/A-Z/a-z/' "
 alias wgetncc='wget --no-check-certificate'
 alias {up,..}='cd ..'
-alias h='history | tail'
 alias dgs="dpkg --get-selections"
 alias dud="du --max-depth=1 -h | sort -h"
 alias dns="dig +nocmd $1 +noall +answer"
@@ -143,4 +233,3 @@ alias lpng="feh \$(ls -tr *.png | tail -1)"
 alias pw="tr -d -c 'a-zA-Z0-9!@#$%^&*()' < /dev/urandom | head -c 18; echo"
 alias whatsmyip="curl ipinfo.io/ip"
 alias notes="vim ~/misc/notes.txt"
-alias clock="watch -t -n1 'date +%T| figlet -W -c -f big'"
