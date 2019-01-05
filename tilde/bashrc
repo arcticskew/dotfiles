@@ -111,6 +111,7 @@ fi
 # shortcuts
 alias x="exit"
 alias d="ls -d */"
+alias l="cd -"
 alias q="ssh quark"
 alias n="ssh skew-t.com"
 
