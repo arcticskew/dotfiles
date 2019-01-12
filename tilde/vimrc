@@ -192,8 +192,6 @@ hi GitGutterAddDefault ctermbg=0
 hi GitGutterChangeDefault ctermbg=0
 hi GitGutterDeleteDefault ctermbg=0
 
-execute pathogen#infect()
-
 if version >= 600
   filetype plugin indent on
 endif
