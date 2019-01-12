@@ -1,0 +1,21 @@
+[submodule "tilde/vim/pack/arcticskew/start/vim-airline-themes"]
+	path = tilde/vim/pack/arcticskew/start/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "tilde/vim/pack/arcticskew/start/nerdtree"]
+	path = tilde/vim/pack/arcticskew/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "tilde/vim/pack/arcticskew/start/vim-airline"]
+	path = tilde/vim/pack/arcticskew/start/vim-airline
+	url = https://github.com/bling/vim-airline
+[submodule "tilde/vim/pack/arcticskew/start/open-file-under-cursor"]
+	path = tilde/vim/pack/arcticskew/start/open-file-under-cursor
+	url = https://github.com/amix/open_file_under_cursor.vim.git
+[submodule "tilde/vim/pack/arcticskew/start/vim-bufonly"]
+	path = tilde/vim/pack/arcticskew/start/vim-bufonly
+	url = https://github.com/schickling/vim-bufonly.git
+[submodule "tilde/vim/pack/arcticskew/start/vim-fugitive"]
+	path = tilde/vim/pack/arcticskew/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "tilde/vim/pack/arcticskew/start/vim-gitgutter"]
+	path = tilde/vim/pack/arcticskew/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
