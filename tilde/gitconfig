@@ -21,3 +21,5 @@
 	all = "!f() { ls -R -d */.git | sed s,/.git,, | xargs -P10 -I{} git -C {} $1; }; f"
 [credential]
     helper = store
+[diff]
+	wsErrorHighlight = all
