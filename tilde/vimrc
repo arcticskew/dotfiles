@@ -60,6 +60,7 @@ let mapleader = ","
 map <silent> <leader>sl :set list!<CR>
 map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
+map <leader>f :CtrlP<CR>
 
 " spelling shortcuts
 map <silent> <leader>ss :setlocal spell!<CR>
@@ -81,22 +82,21 @@ map <silent> <leader>so :set paste!<CR>
 " notes file
 map <silent> <leader>z :e ~/misc/notes.txt<CR>
 
+" c programming
+map <silent> <leader>h :e %:r.h<CR>
+map <silent> <leader>k :CtrlPTag<CR>
+map <silent> <leader>c <C-]>
+map <silent> <leader>b :pop<CR>
+map <silent> <leader>l :%! clang-format %<CR>
+
 " gitgutter
-map <silent> <leader>sg :GitGutterToggle<CR>
 map <silent> <leader>gg :GitGutterToggle<CR>
-map <silent> <leader>sh :GitGutterLineHighlightsToggle<CR>
 map <silent> <leader>gh :GitGutterLineHighlightsToggle<CR>
 
 " fugitive
 map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gw :Gwrite<CR>
 map <silent> <leader>gc :Gcommit<CR>
-
-" syntastic
-map <silent> <leader>sy :SyntasticCheck<CR>
-map <silent> <leader>sr :SyntasticReset<CR>
-map <silent> <leader>en :lnext<CR>
-map <silent> <leader>ep :lprev<CR>
 
 " nerdtree
 map <silent> <leader>t :NERDTreeToggle<CR>
