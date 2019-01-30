@@ -79,15 +79,18 @@ vmap <leader>y "+y
 map <leader>P "+p
 map <silent> <leader>so :set paste!<CR>
 
-" notes file
-map <silent> <leader>z :e ~/misc/notes.txt<CR>
-
 " c programming
 map <silent> <leader>h :e %:r.h<CR>
 map <silent> <leader>k :CtrlPTag<CR>
 map <silent> <leader>c <C-]>
-map <silent> <leader>b :pop<CR>
-map <silent> <leader>l :%! clang-format %<CR>
+
+" clang-format
+function! Clangformat()
+    let ln = line('.')
+    %! clang-format %
+    call cursor(ln, 0)
+endfunction
+map <silent> <leader>l :call Clangformat()<CR>
 
 " gitgutter
 map <silent> <leader>gg :GitGutterToggle<CR>
@@ -150,6 +153,7 @@ cmap w!! w !sudo tee % > /dev/null<cr>
 let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = get(g:,'airline_symbols',{})
 let g:airline_symbols.linenr = ''
@@ -173,17 +177,20 @@ function! Mdsetup()
 endfunction
 au FileType markdown call Mdsetup()
 
-" Syntastic
+" Syntastic/YouCompleteMe
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_warning_symbol = '!'
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
+hi YcmErrorSign ctermbg=NONE
+hi YcmErrorSign ctermbg=NONE
+hi YcmWarningSection ctermfg=yellow ctermbg=black
+nnoremap <Leader>z :YcmCompleter GetType<CR>
+nnoremap <Leader>x :YcmCompleter FixIt<CR>
 
 " NERDTree
 let NERDTreeQuitOnOpen = 1
+let NERDTreeIgnore = ['\.pyc$','\.o$']
 
 " GitGutter
 let g:gitgutter_enabled = 0
