@@ -58,9 +58,10 @@ let mapleader = ","
 
 " general shortcuts
 map <silent> <leader>sl :set list!<CR>
-map <leader>d :silent !mupdf %<.pdf<CR>
 map <leader>r :silent !./%<CR>
+map <leader>a :set awa!<CR>:set awa?<CR>
 map <leader>f :CtrlP<CR>
+nmap <silent> m :update!<CR>
 
 " spelling shortcuts
 map <silent> <leader>ss :setlocal spell!<CR>
