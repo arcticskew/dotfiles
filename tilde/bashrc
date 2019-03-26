@@ -131,6 +131,11 @@ if [ -n "$TMUX" ]; then
     alias tx="tmux detach"
 fi
 
+# ssh keys
+alias s="ssh-add -l"
+alias sd="ssh-add -D"
+alias ga="export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
+
 # syntax highlight
 hc() {
     highlight -O xterm256 $1
@@ -237,3 +242,4 @@ alias ls="ls --color=auto -h"
 alias sl="sl -e"
 alias whatsmyip="curl ipinfo.io/ip"
 alias notes="vim ~/misc/notes.txt"
+alias u='date -u "+%Y%m%d/%H%MZ"'
