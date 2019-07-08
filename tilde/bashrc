@@ -242,4 +242,7 @@ alias ls="ls --color=auto -h"
 alias sl="sl -e"
 alias whatsmyip="curl ipinfo.io/ip"
 alias notes="vim ~/misc/notes.txt"
+alias remake="make clean;make"
+alias webshare='python -m SimpleHTTPServer'
+alias wx="wget -O- -q http://skew-t.com/weather/data.php?type=currentx | jq"
 alias u='date -u "+%Y%m%d/%H%MZ"'
