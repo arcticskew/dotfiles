@@ -92,6 +92,7 @@ function! Clangformat()
     call cursor(ln, 0)
 endfunction
 map <silent> <leader>l :call Clangformat()<CR>
+nmap <silent> f :call Clangformat()<CR>
 
 " gitgutter
 map <silent> <leader>gg :GitGutterToggle<CR>
