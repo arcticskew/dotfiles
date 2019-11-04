@@ -111,7 +111,7 @@ fi
 # shortcuts
 alias x="exit"
 alias d="ls -d */"
-alias l="cd -"
+alias l="ls -1"
 alias q="ssh quark"
 alias n="ssh skew-t.com"
 
@@ -227,6 +227,11 @@ vin() {
   "${EDITOR:-vim}" "${files/\~/$HOME}"
 }
 
+# cmake
+alias lc="cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/home/austin"
+alias cm="cmake --build build"
+alias ct="cmake --build build -t"
+
 # other useful tools
 alias bw='PS1="\u@\h>"'
 alias lcf="rename 'y/A-Z/a-z/' "
@@ -236,8 +241,8 @@ alias dgs="dpkg --get-selections"
 alias dud="du --max-depth=1 -h | sort -h"
 alias dns="dig +nocmd $1 +noall +answer"
 alias lpng="feh \$(ls -tr *.png | tail -1)"
+alias le="exiftool \$(ls -tr *.png | tail -1)"
 alias pw="tr -d -c 'a-zA-Z0-9!@#$%^&*()' < /dev/urandom | head -c 18; echo"
-alias ct="ctags -R ."
 alias ls="ls --color=auto -h"
 alias sl="sl -e"
 alias whatsmyip="curl ipinfo.io/ip"
