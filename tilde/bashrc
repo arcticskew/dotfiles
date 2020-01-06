@@ -112,7 +112,6 @@ fi
 alias x="exit"
 alias d="ls -d */"
 alias l="ls -1"
-alias q="ssh quark"
 alias n="ssh skew-t.com"
 
 # dotfiles
@@ -134,7 +133,7 @@ fi
 # ssh keys
 alias s="ssh-add -l"
 alias sd="ssh-add -D"
-alias ga="export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
+#alias ga="export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
 
 # syntax highlight
 hc() {
@@ -229,14 +228,19 @@ vin() {
 
 # cmake
 alias lc="cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/home/austin"
+alias ic="cmake -S . -B build"
 alias cm="cmake --build build"
 alias ct="cmake --build build -t"
+
+# lastpass
+alias lxpass="lpass show -cp acrosslx.eee"
+alias template="lpass show -cp template"
+alias qs="lpass show -cp --field Passphrase \"SSH: quark-telefunken\""
 
 # other useful tools
 alias bw='PS1="\u@\h>"'
 alias lcf="rename 'y/A-Z/a-z/' "
 alias wgetncc='wget --no-check-certificate'
-alias {up,..}='cd ..'
 alias dgs="dpkg --get-selections"
 alias dud="du --max-depth=1 -h | sort -h"
 alias dns="dig +nocmd $1 +noall +answer"
