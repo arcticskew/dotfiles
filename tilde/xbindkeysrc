@@ -92,6 +92,9 @@
 "xte 'keydown Control_L' 'key w' 'keyup Control_L'"
   b:10
 
+"xdotool search --name Meet windowactivate --sync %1 key Control_L+d"
+  m:0x4 + c:119
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
