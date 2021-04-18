@@ -227,7 +227,7 @@ vin() {
 }
 
 # cmake
-alias lc="cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/home/austin"
+alias lc="cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/home/austin/.local"
 alias ic="cmake -S . -B build"
 alias cm="cmake --build build"
 alias ct="cmake --build build -t"
@@ -238,7 +238,7 @@ alias template="lpass show -cp template"
 alias qs="lpass show -cp --field Passphrase \"SSH: quark-telefunken\""
 
 # other useful tools
-alias bw='PS1="\u@\h>"'
+alias sp='PS1="\u@\h>"'
 alias lcf="rename 'y/A-Z/a-z/' "
 alias wgetncc='wget --no-check-certificate'
 alias dgs="dpkg --get-selections"
