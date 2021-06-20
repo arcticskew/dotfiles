@@ -232,11 +232,6 @@ alias ic="cmake -S . -B build"
 alias cm="cmake --build build"
 alias ct="cmake --build build -t"
 
-# lastpass
-alias lxpass="lpass show -cp acrosslx.eee"
-alias template="lpass show -cp template"
-alias qs="lpass show -cp --field Passphrase \"SSH: quark-telefunken\""
-
 # other useful tools
 alias sp='PS1="\u@\h>"'
 alias lcf="rename 'y/A-Z/a-z/' "
