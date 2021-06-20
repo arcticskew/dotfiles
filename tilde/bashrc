@@ -113,6 +113,8 @@ alias x="exit"
 alias d="ls -d */"
 alias l="ls -1"
 alias n="ssh skew-t.com"
+alias q="ssh quark"
+alias z="mosh quark -- tmux new-session -A -s main"
 
 # dotfiles
 alias dotfiles='vim ~/projects/dotfiles/tilde'
