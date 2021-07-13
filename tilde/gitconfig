@@ -6,7 +6,7 @@
 [alias]
     co = checkout
     ci = commit
-    s = status -s
+    s = status -uno
     st = status
     r = remote -v
     br = branch
@@ -16,10 +16,10 @@
     ls = ls-tree --name-status -r HEAD
     last = log -1 HEAD
     list = diff-tree --no-commit-id --name-only -r
+    fd = log --left-right --graph --cherry-pick --oneline
     gr = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(white)%s%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset)' --all
-    grf = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(green)%ar%C(reset) %C(white)%s%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	all = "!f() { ls -R -d */.git | sed s,/.git,, | xargs -P10 -I{} git -C {} $1; }; f"
-[credential]
-    helper = store
+    grf = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(green)%ar%C(reset) %C(white)%s%C(reset) %C(blue)%an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    grel = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(green)%ar%C(reset) %C(white)%s%C(reset) %C(dim white)%an%C(reset)' origin/master..origin/release
+    all = "!f() { ls -R -d */.git | sed s,/.git,, | xargs -P10 -I{} git -C {} $1; }; f"
 [diff]
-	wsErrorHighlight = all
+    wsErrorHighlight = all
