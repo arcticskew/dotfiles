@@ -104,10 +104,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
-fi
-
 # shortcuts
 alias x="exit"
 alias d="ls -d */"
@@ -139,10 +135,10 @@ alias sd="ssh-add -D"
 
 # syntax highlight
 hc() {
-    highlight -O xterm256 $1
+    highlight -O ansi $1
 }
 hl() {
-    highlight -O xterm256 $1 | less -R
+    highlight -O ansi $1 | less -R
 }
 
 # - fzf cd to selected directory
@@ -253,3 +249,8 @@ alias remake="make clean;make"
 alias webshare='python -m SimpleHTTPServer'
 alias wx="wget -O- -q http://skew-t.com/weather/data.php?type=currentx | jq"
 alias u='date -u "+%Y%m%d/%H%MZ"'
+
+# local overrides
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
